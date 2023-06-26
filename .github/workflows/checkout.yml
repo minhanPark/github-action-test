@@ -4,7 +4,13 @@ jobs:
   checkout:
     runs-on: ubuntu-latest
     steps:
-      - run: ls -al
-      - uses: actions/checkout@v3
-      - run: ls -al
+      - name: 디렉토리 확인
+        run: ls -al
+
+      - name: 체크아웃
+        uses: actions/checkout@v3
+
+      - name: 체크아웃 변화 확인
+        run: ls -al
+
       - run: cat .github/workflows/checkout.yml
