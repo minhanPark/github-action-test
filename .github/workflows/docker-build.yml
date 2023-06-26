@@ -9,5 +9,5 @@ jobs:
     steps:
       - run: docker -v
       - run: echo ${{github.run_number}}
-      - run: docker build . -t ${{secrets.REGISTRY_URL}}/action-test:${{github.run_number}}
+      - run: docker build -t ${{secrets.REGISTRY_URL}}/action-test:${{github.run_number}} .
       - run: docker images
