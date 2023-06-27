@@ -7,8 +7,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: docker -v
-      - run: ls -al
-      - run: echo ${{ github.run_number }}
-      - run: docker build -t ${{ secrets.REGISTRY_URL }}/action-test:${{ github.run_number }} .
-      - run: docker images
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Login to Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ secrets.REGISTRY_URL }}
+          username: ${{ secrets.REGISTRY_ID }}
+          password: ${{ secrets.REGISTRY_PW }}
+      - name: Build and Push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: ${{ secrets.REGISTRY_URL }}/test:${{ github.run_number }}
