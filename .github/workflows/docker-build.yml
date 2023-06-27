@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: docker -v
+      - run: ls -al
       - run: echo ${{ github.run_number }}
       - run: docker build -t ${{ secrets.REGISTRY_URL }}/action-test:${{ github.run_number }} .
       - run: docker images
