@@ -29,7 +29,7 @@ jobs:
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.SSH_IP }}
-          username: ${{ secrets.SSH_user }}
+          username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PW }}
           port: ${{ secrets.SSH_PORT }}
           script: docker ps
