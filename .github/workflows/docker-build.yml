@@ -33,6 +33,7 @@ jobs:
           password: ${{ secrets.SSH_PW }}
           port: ${{ secrets.SSH_PORT }}
           script: |
+            cat ./pw.txt | docker login --username ${{ secrets.REGISTRY_ID }} --password-stdin ${{ secrets.REGISTRY_URL }}
             docker container stop test-con
             docker container rm test-con
             docker container run -p 5551:3000 -d --name test-con ${{ secrets.REGISTRY_URL }}/test:${{ github.run_number }}
