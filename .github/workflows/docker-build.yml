@@ -32,4 +32,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PW }}
           port: ${{ secrets.SSH_PORT }}
-          script: docker ps
+          script: |
+            docker container stop test-con
+            docker container rm test-con
+            docker container run -p 5551:3000 -d --name test-con ${{ secrets.REGISTRY_URL }}/test:${{ github.run_number }}
