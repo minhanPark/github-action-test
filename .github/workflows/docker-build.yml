@@ -25,3 +25,11 @@ jobs:
           push: true
           tags: ${{ secrets.REGISTRY_URL }}/test:${{ github.run_number }}
           platforms: linux/arm64
+      - name: ssh commands
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SSH_IP }}
+          username: ${{ secrets.SSH_user }}
+          password: ${{ secrets.SSH_PW }}
+          port: ${{ secrets.SSH_PORT }}
+          script: docker ps
